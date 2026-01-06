@@ -1,0 +1,72 @@
+{
+  "general": {
+    "demo_title": "LightFace-SAM v2 (inference-only face verification)",
+    "description": "Upload two aligned 112x112-ish face crops. The demo computes 256-D embeddings, cosine similarity, and a threshold-based decision.",
+    "timeout": 20
+  },
+
+  "build": {
+    "build1": {
+      "url": "https://github.com/nasir050298/lightface_sam_ipol.git",
+      "move": "src,models,requirements.txt"
+    }
+  },
+
+  "inputs": [
+    {
+      "type": "image",
+      "description": "Face A (RGB)",
+      "max_pixels": "112*112",
+      "dtype": "3x8i",
+      "ext": ".png",
+      "required": true
+    },
+    {
+      "type": "image",
+      "description": "Face B (RGB)",
+      "max_pixels": "112*112",
+      "dtype": "3x8i",
+      "ext": ".png",
+      "required": true
+    }
+  ],
+
+  "params": [
+    {
+      "type": "range",
+      "id": "th",
+      "label": "Cosine threshold",
+      "values": { "min": -1.0, "max": 1.0, "step": 0.01, "default": 0.3 }
+    }
+  ],
+
+  "run": "python3 src/ipol_online_demo.py input_0.png input_1.png --th $th",
+
+  "results": [
+    {
+      "type": "gallery",
+      "label": "<h3>Inputs</h3>",
+      "contents": {
+        "Uploaded inputs": { "img": ["input_0.png", "input_1.png"] },
+        "Resized preview (112x112)": { "img": "inputs.png" }
+      }
+    },
+    {
+      "type": "text_file",
+      "label": "<h3>Cosine similarity</h3>",
+      "contents": "similarity.txt",
+      "style": "{'width':'40em','height':'3em','background-color':'#FFE'}"
+    },
+    {
+      "type": "text_file",
+      "label": "<h3>Decision</h3>",
+      "contents": "decision.txt",
+      "style": "{'width':'40em','height':'3em','background-color':'#EFE'}"
+    },
+    {
+      "type": "file_download",
+      "label": "<h3>Download JSON summary</h3>",
+      "contents": "result.json"
+    }
+  ]
+}

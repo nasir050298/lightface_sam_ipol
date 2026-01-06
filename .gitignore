@@ -1,0 +1,11 @@
+# local test images + generated outputs
+img1.png
+img2.png
+inputs.png
+similarity.txt
+decision.txt
+result.json
+
+# python junk
+__pycache__/
+*.pyc

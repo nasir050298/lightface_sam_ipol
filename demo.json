@@ -7,8 +7,8 @@
 
   "build": {
     "build1": {
-      "url": "https://github.com/nasir050298/lightface_sam_ipol.git",
-      "move": "src,models,requirements.txt"
+      "url": "https://github.com/nasir050298/lightface_sam_ipol/archive/refs/tags/v1.0.zip",
+      "move": "lightface_sam_ipol-v1.0/src,lightface_sam_ipol-v1.0/models,lightface_sam_ipol-v1.0/requirements.txt"
     }
   },
 
